@@ -37,7 +37,7 @@ public class TestingController {
 
     @PostMapping("/presigned-urls")
     public ResponseEntity<?> getPreSignedURLs(@RequestParam String key) {
-        return ResponseEntity.ok(s3Service.presignAllUnderPrefixAsMap(key, Duration.ofSeconds(60)));
+        return ResponseEntity.ok(s3Service.presignAllUnderPrefixAsMap(key, Duration.ofDays(7)));
     }
 
 }

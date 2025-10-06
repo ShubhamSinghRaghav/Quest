@@ -17,7 +17,7 @@
     <description>Quest</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <aws.sdk.version>2.29.34</aws.sdk.version>
         <jsoup.version>1.17.2</jsoup.version>
         <httpclient5.version>5.4.1</httpclient5.version>
@@ -77,56 +77,17 @@
             <version>${httpclient5.version}</version>
         </dependency>
 
-        <!-- Spring Cloud Function (explicit versions) -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-function-context</artifactId>
-            <version>${spring-cloud-function.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-function-adapter-aws</artifactId>
-            <version>${spring-cloud-function.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-lambda-java-core</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
 
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Skip Spring Boot's nested-jar repackage for Lambda -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <skip>true</skip>
+                    <mainClass>com.assessment.quest.QuestApplication</mainClass>
                 </configuration>
-            </plugin>
-
-            <!-- Create an uber-jar with all dependencies flattened -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals><goal>shade</goal></goals>
-                        <configuration>
-                            <!-- keeps your original POM intact -->
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <!-- name the output jar -->
-                            <finalName>quest-lambda</finalName>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
