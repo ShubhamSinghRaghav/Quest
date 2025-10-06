@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  IngestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: java21
+      Architectures: [arm64]
+      Handler: com.assessment.quest.lambda.IngestHandler::handleRequest
+      CodeUri: .
+      MemorySize: 1536
+      Timeout: 300
+    Metadata:
+      BuildMethod: makefile
